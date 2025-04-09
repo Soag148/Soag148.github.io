@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Web IPTV Player</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📺</text></svg>"/>
+    <link rel="stylesheet" href="style.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" crossOrigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <h1><span class="logo-icon">📺</span> IPTV Player</h1>
+        <div class="playlist-loader">
+            <div class="playlist-controls">
+                <label for="m3u-url">M3U URL:</label>
+                <input type="url" id="m3u-url" placeholder="Ingrese la URL de la lista"/>
+                <button id="load-m3u">Cargar Playlist</button>
+            </div>
+            <div class="playlist-manager">
+                <h3>Mis Listas M3U</h3>
+                <div id="playlist-list">
+                    <!-- Las listas M3U se mostrarán aquí -->
+                </div>
+                <div class="playlist-actions">
+                    <button id="add-playlist" class="secondary-button">Añadir Nueva Lista</button>
+                    <button id="manage-playlists" class="secondary-button">Gestionar Listas</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <aside class="sidebar">
+            <h2><span class="icon">⭐</span> Favoritos</h2>
+            <div id="favorites-list">
+                <p>No hay favoritos añadidas todavía.</p>
+                <!-- Favorite items will appear here -->
+            </div>
+            <h2><span class="icon">📡</span> TV en Vivo</h2>
+            <div id="channel-list">
+                <!-- Channel groups and items will be loaded here -->
+                <p>Cargue una URL M3U para ver canales.</p>
+            </div>
+            <h2><span class="icon">⏱️</span> Continar Viendo</h2>
+            <div id="continue-watching">
+                <!-- Recently watched items will appear here -->
+                <p>No hay artículos vistos recientemente.</p>
+            </div>
+        </aside>
+
+        <section class="main-content">
+            <div class="video-container">
+                <video id="video-player" controls poster="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%2290%22 viewBox=%220 0 160 90%22><rect width=%22160%22 height=%2290%22 fill=%22%23111%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%23555%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>
+                    Cargue M3U y seleccione un canal</text></svg>"></video>
+            </div>
+            <div id="current-channel-info">
+                <p>Seleccione un canal para comenzar a reproducir.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

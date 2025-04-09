@@ -1,0 +1,582 @@
+:root {
+    --crunchy-orange: #f47521;
+    --dark-bg: #1a1a1a;
+    --medium-bg: #2a2a2a;
+    --light-bg: #3a3a3a;
+    --text-color: #e0e0e0;
+    --text-muted: #888;
+    --border-color: #444;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    position: relative;
+    background-color: var(--medium-bg);
+    color: var(--text-color);
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 2px solid var(--crunchy-orange);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-icon {
+    color: var(--crunchy-orange);
+    font-size: 1.8rem; /* Make icon slightly larger */
+}
+
+.playlist-loader {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.playlist-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.playlist-manager {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 15px;
+}
+
+.playlist-manager h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    color: #fff;
+}
+
+#playlist-list {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.playlist-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+
+.playlist-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.playlist-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.secondary-button {
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.secondary-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.playlist-loader label {
+    display: none; /* Keep hidden */
+}
+
+.playlist-loader input[type="url"] {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    min-width: 280px;
+    flex-grow: 1;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.playlist-loader input[type="url"]::placeholder {
+    color: var(--text-muted);
+}
+
+.playlist-loader button {
+    padding: 0.6rem 1.2rem;
+    background-color: var(--crunchy-orange);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.playlist-loader button:hover {
+    background-color: #e0600f; /* Slightly darker orange */
+}
+.playlist-loader button:active {
+    transform: scale(0.98);
+}
+
+.container {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden; /* Prevent scrolling issues */
+}
+
+.sidebar {
+    width: 280px; /* Slightly wider sidebar */
+    background-color: var(--medium-bg);
+    padding: 1rem;
+    overflow-y: auto;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--light-bg) var(--medium-bg); /* Firefox */
+}
+
+/* Webkit scrollbar styling */
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: var(--medium-bg);
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: var(--light-bg);
+  border-radius: 4px;
+  border: 2px solid var(--medium-bg);
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    margin-bottom: 0.8rem; /* Spacing below heading */
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.sidebar h2 .icon {
+    color: var(--crunchy-orange);
+}
+
+#channel-list, #continue-watching, #favorites-list {
+    margin-bottom: 1.5rem; /* More space between sections */
+}
+
+#channel-list p, #continue-watching p, #favorites-list p {
+     color: var(--text-muted);
+     font-style: italic;
+     font-size: 0.9rem;
+     padding-left: 0.5rem;
+}
+
+.channel-group {
+    margin-bottom: 0.5rem;
+}
+
+.channel-group-title {
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.5rem 0.8rem;
+    background-color: var(--light-bg);
+    border-radius: 3px;
+    margin-bottom: 0.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.channel-group-title:hover {
+    background-color: #4a4a4a;
+}
+
+.channel-group-title::after {
+    content: '▼'; /* Collapsed state indicator */
+    font-size: 0.8em;
+    margin-left: 5px;
+    transition: transform 0.2s ease-in-out;
+    color: var(--text-muted);
+}
+
+.channel-group.collapsed .channel-group-title::after {
+     transform: rotate(-90deg); /* Expanded state indicator */
+}
+
+.channel-group-items, #favorites-list ul, #continue-watching ul {
+    list-style: none;
+    padding-left: 0; /* Remove default padding */
+    margin: 0;
+    max-height: 350px; /* Adjust max height if needed */
+    overflow-y: auto;   /* Scroll within group */
+    display: block; /* Default */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--light-bg) var(--medium-bg); /* Firefox */
+}
+
+/* Webkit scrollbar styling for lists */
+.channel-group-items::-webkit-scrollbar,
+#favorites-list ul::-webkit-scrollbar,
+#continue-watching ul::-webkit-scrollbar {
+  width: 6px;
+}
+.channel-group-items::-webkit-scrollbar-thumb,
+#favorites-list ul::-webkit-scrollbar-thumb,
+#continue-watching ul::-webkit-scrollbar-thumb {
+  background-color: var(--light-bg);
+  border-radius: 3px;
+}
+
+.channel-group.collapsed .channel-group-items {
+    display: none;
+}
+
+.channel-item, .continue-item, .favorite-item {
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.2s ease;
+    font-size: 0.9rem;
+    display: flex; /* Use flex for alignment */
+    justify-content: space-between; /* Push fav icon to the right */
+    align-items: center;
+}
+.channel-item:last-child, .continue-item:last-child, .favorite-item:last-child {
+    border-bottom: none;
+}
+
+.channel-item:hover, .continue-item:hover, .favorite-item:hover {
+    background-color: var(--light-bg);
+}
+
+.channel-item.active {
+    background-color: var(--crunchy-orange);
+    color: white;
+    font-weight: bold;
+}
+.channel-item.active:hover {
+    background-color: #e0600f; /* Darker orange on hover */
+}
+.channel-item.active .fav-button {
+    color: white; /* Ensure icon is visible on active background */
+}
+.channel-item.active .fav-button.favorited {
+    color: yellow; /* Maybe a different color for favorited on active */
+}
+
+.fav-button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.2rem;
+    font-size: 1.1rem; /* Adjust icon size */
+    margin-left: 0.5rem; /* Space between text and icon */
+    transition: color 0.2s ease, transform 0.1s ease;
+    display: flex; /* Helps centering the SVG */
+    align-items: center;
+}
+.fav-button svg {
+    width: 16px; /* Control SVG size */
+    height: 16px;
+    fill: currentColor; /* Use text color for SVG fill */
+}
+
+.fav-button:hover {
+    color: var(--crunchy-orange);
+    transform: scale(1.1);
+}
+
+.fav-button.favorited {
+    color: var(--crunchy-orange); /* Orange when favorited */
+}
+.fav-button.favorited:hover {
+    color: #e0600f; /* Darker orange on hover */
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--dark-bg); /* Ensure main content matches body */
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* Aspecto 16:9 */
+    background-color: #000;
+    overflow: hidden;
+}
+
+#video-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: #000; /* Ensure black background while loading */
+}
+/* Style video controls (limited cross-browser support) */
+/* Webkit */
+#video-player::-webkit-media-controls-panel {
+    background-color: rgba(30, 30, 30, 0.8);
+    color: var(--text-color);
+}
+#video-player::-webkit-media-controls-play-button,
+#video-player::-webkit-media-controls-timeline,
+#video-player::-webkit-media-controls-current-time-display,
+#video-player::-webkit-media-controls-time-remaining-display,
+#video-player::-webkit-media-controls-mute-button,
+#video-player::-webkit-media-controls-volume-slider,
+#video-player::-webkit-media-controls-fullscreen-button {
+    color: var(--text-color);
+    filter: brightness(1.2); /* Make default icons slightly brighter */
+}
+#video-player::-webkit-media-controls-volume-slider {
+    background-color: var(--light-bg);
+}
+#video-player::-webkit-media-controls-timeline {
+    background-color: var(--light-bg);
+    border-radius: 2px;
+    height: 5px;
+}
+
+#current-channel-info {
+    text-align: center;
+    color: var(--text-muted);
+    margin-top: 0.5rem; /* Reduced margin */
+    font-size: 0.9rem;
+    display: none; /* Oculto por defecto */
+}
+#current-channel-info p {
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.8rem 1rem;
+    }
+    header h1 {
+        margin-bottom: 0.5rem;
+    }
+    .playlist-loader {
+        width: 100%;
+        margin-top: 0.5rem;
+        gap: 0.5rem;
+    }
+    .playlist-loader input[type="url"] {
+        min-width: 150px; /* Adjust for smaller screens */
+    }
+    .container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: 40vh; /* Slightly more height for sidebar on small screens */
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        box-sizing: border-box;
+        padding: 0.8rem;
+    }
+    .sidebar h2 {
+        font-size: 1rem;
+        padding-bottom: 0.4rem;
+        margin-bottom: 0.5rem;
+    }
+    .main-content {
+        flex-grow: 1;
+        padding: 1rem; /* Reset padding if needed */
+    }
+    .video-container {
+        /* No change needed unless aspect ratio needs adjustment */
+    }
+    .channel-item, .continue-item, .favorite-item {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.85rem;
+    }
+    .fav-button {
+        font-size: 1rem;
+    }
+    .fav-button svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.playlist-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-content h3 {
+    margin: 0 0 20px 0;
+    color: #fff;
+    text-align: center;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.playlist-list-detailed {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.playlist-item-detailed {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.playlist-url {
+    color: #888;
+    font-size: 0.9em;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.danger-button {
+    padding: 8px 15px;
+    background: #dc3545;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.danger-button:hover {
+    background: #c82333;
+}
+
+/* Ocultar elementos de websim */
+[id^="websim-"],
+[class^="websim-"],
+[class*=" websim-"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Estilos para el botón de información del canal */
+.info-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.info-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+/* Estilos para el botón de mostrar/ocultar la tarjeta de carga de listas */
+.playlist-toggle-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--crunchy-orange);
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.playlist-toggle-button:hover {
+    background-color: #e0600f;
+    transform: scale(1.1);
+}
